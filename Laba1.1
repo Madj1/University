@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba1
+{
+    class Programm
+    {
+        static void Main()
+        {
+            Console.WriteLine("\nт/у |   1\t2\t3\t4\t5\t6\t7\t8\t9");
+            Console.Write("--------------------------------------------------------------------------");
+            Console.WriteLine();
+            for (int i = 1; i < 10; i++)
+            {
+                Console.Write(i + "   |  ");
+                for (int j = 1; j < 10; j++)
+                {
+                    Console.Write("\t" + i * j);
+                }
+                Console.WriteLine("");
+                Console.WriteLine("");
+            }
+            Console.ReadLine();
+
+            const int x1 = 10;
+            const int x2 = 10;
+
+            int[,] ints = new int[x1, x2]
+                {
+                    { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    { 1, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    { 2, 2, 4, 6, 8, 10, 12, 14, 16, 18 },
+                    { 3, 3, 6, 9, 12, 15, 18, 21, 24, 27 },
+                    { 4, 4, 8, 12, 16, 20, 24, 28, 32, 36 },
+                    { 5, 5, 10, 15, 20, 25, 30, 35, 40, 45 },
+                    { 6, 6, 12, 18, 24, 30, 36, 42, 48, 54 },
+                    { 7, 7, 14, 21, 28, 35, 42, 49, 56, 63 },
+                    { 8, 8, 16, 24, 32, 40, 48, 56, 64, 72 },
+                    { 9, 9, 18, 27, 36, 45, 54, 63, 72, 81 }
+                };
+
+            for (int i = 0; i < x1; i++)
+            {
+                for (int j = 0; j < x2; j++)
+                {
+                    Console.Write($"{ints[i, j]} \t");
+                }
+                Console.WriteLine();
+            };
+        }
+    }
+}
