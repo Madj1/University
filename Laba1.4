@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Laba1._4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int i;
+            
+            Console.Write("Введите минимальное значение: ");
+            Console.ReadLine();
+            Console.Write("Введите максимальное значение: ");
+            string text = Console.ReadLine();
+            bool suc = int.TryParse(text, out i);
+            if (suc)
+            {
+                int[] mas1 = new int[i];
+                Console.WriteLine("Массив:");
+                for (int j = 0; j < mas1.Length; j++)
+                {
+                    for (int k = 0; k < i; k++)
+                    {
+                        mas1[k] = random.Next(mas1[k]);
+                        Console.Write(mas1[k] + " ");
+                    }
+                    mas1[j] = random.Next(mas1[j]);
+                    Console.Write(mas1[j] + " ");
+                    Console.WriteLine();
+                }
+                Console.ReadLine();
+            }
+        }
+    }
+}
