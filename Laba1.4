@@ -38,3 +38,26 @@ namespace Laba1._4
         }
     }
 }
+/* Второй способ
+Random rand = new Random();
+            Console.Write("введите минимальное значение: ");
+            int min = int.Parse(Console.ReadLine());
+            Console.Write("введите максимальное значение: ");
+            int max = int.Parse(Console.ReadLine());
+            Console.Write("введите количество строк массива: ");
+            int m = int.Parse(Console.ReadLine());
+            Console.Write("введите количество столбцов массива: ");
+            int n = int.Parse(Console.ReadLine());
+            int[,] arr = new int[m, n];
+            Console.WriteLine("массив:");
+            for (int i = 0; i < m; i++)
+            {
+                for (int k = 0; k < n; k++)
+                {
+                    arr[i, k] = rand.Next(min, max + 1);
+                    Console.Write(arr[i, k] + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadKey();
+*/
