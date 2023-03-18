@@ -1,0 +1,177 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Дневник
+{
+    internal class Program
+    {
+        static void Enter()
+        {
+            Console.WriteLine("Введите ФИО(Год) студента: ");
+        }
+        public struct Sstudent
+        {
+            public string fio;
+            public int math;
+            public int phys;
+        }
+        static void Main()
+        {
+            Student[] studentsList = new Student[10];
+
+            for (int i = 0; i < studentsList.Length; i++)
+            {
+                Student newStudent = CreateNewStudentRequest();
+                if (newStudent != null) studentsList[i] = newStudent;
+                else break;
+            }
+
+        
+        
+            Sstudent Ivanov = new Sstudent(); // переменная означающая структуру
+            Ivanov.fio = "Иванов";
+            Ivanov.math = 5;
+            Ivanov.phys = 2;
+
+            Sstudent Petrov = new Sstudent();
+            Petrov.fio = "Петров";
+            Petrov.math = 4;
+            Petrov.phys = 4;
+
+            Sstudent God = new Sstudent();
+            God.fio = "Год";
+            God.math = 5;
+            God.phys = 5;
+
+
+            string[] Spisok; // массив со списком студентов
+            Spisok = new string[11];
+
+            Spisok[0] = God.fio;
+            Spisok[1] = Petrov.fio;
+            Spisok[2] = Ivanov.fio;
+
+            string a = Spisok[0];
+            string b = Spisok[1];
+            string c = Spisok[2];
+
+
+            Enter();
+
+            Console.WriteLine("\n--- Полный список студентов ---");
+            WriteAllStudents(studentsList);
+
+            Console.WriteLine("\n--- Студенты только с отличными оценками ---");
+            WriteOnlyExellentStudents(studentsList, 10);
+
+            Console.WriteLine("\n--- Студенты с неудовлетворительными оценками ---");
+            WriteOnlyBadStudents(studentsList, 6);
+        }
+
+        // Выводит студентов, у которых есть оценки ниже заданного порога (startBadScore)
+        private static void WriteOnlyBadStudents(Student[] studentsList, int startBadScore)
+        {
+            foreach (Student student in studentsList)
+            {
+                if (student == null) break;
+
+                for (int i = 0; i < student.scores.Count; i++)
+                {
+                    if (student.scores[i] <= startBadScore)
+                    {
+                        Console.WriteLine(student);
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        // Выводит студентов у которых все оценки выше заданного порога (minExellentScore)
+        private static void WriteOnlyExellentStudents(Student[] studentsList, int minExellentScore)
+        {
+            foreach (Student student in studentsList)
+            {
+                if (student == null) break;
+
+                bool onlyExellent = true;
+                for (int i = 0; i < student.scores.Count; i++)
+                {
+                    if (student.scores[i] < minExellentScore)
+                    {
+                        onlyExellent = false;
+                        break;
+                    }
+                }
+
+                if (onlyExellent)
+                {
+                    Console.WriteLine(student);
+                }
+            }
+        }
+
+        // Просто выводит информацию о всех студентах в массиве
+        private static void WriteAllStudents(Student[] studentsList)
+        {
+
+            foreach (Student student in studentsList)
+            {
+                if (student == null) break;
+
+                Console.WriteLine(student);
+            }
+        }
+
+        private static Student CreateNewStudentRequest()
+        {
+            Console.Write("Создать нового студента? (y/n): ");
+            if (Console.ReadLine() != "y")
+            {
+                return null;
+            }
+
+            Console.Write("ФИО: ");
+            string fullName = Console.ReadLine();
+
+            Console.Write("Оценки (через пробел): ");
+            // Trim обрезает пробелы, если они есть, по краям строки.
+            // Split разделяет слова по пробелу и возвращает массив этих слов
+            string[] scoresStringInput = Console.ReadLine().Trim().Split();
+
+            // переводим оценки-строки в числа
+            List<int> scores = new List<int>();
+            foreach (string score in scoresStringInput)
+            {
+                scores.Add(int.Parse(score));
+            }
+
+            Student student = new Student(fullName, scores);
+            Console.WriteLine("Студент создан.\n");
+            return student;
+        }
+
+    }
+
+    public class Student
+    {
+        public string fullName;
+        public List<int> scores;
+
+        public Student(string fullName, List<int> scores = null)
+        {
+            this.fullName = fullName;
+
+            this.scores = new List<int>();
+            if (scores != null) this.scores.AddRange(scores);
+        }
+
+        public override string ToString()
+        {
+            return $"{fullName}: {string.Join(", ", scores)}"; //string.Join выводит элементы коллекции через заданный символ
+        }
+    }
+}
