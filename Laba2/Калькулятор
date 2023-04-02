@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Q1
+{
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        
+        public string D1; //действие 1
+        public string D2; //действие 2
+        
+        public MainWindow()
+        {
+
+            InitializeComponent();
+
+        }
+
+         private void Summ(object sender, RoutedEventArgs e) // плюс
+        {
+            double dn1, dn2, result;
+            dn1 = Convert.ToDouble(AA.Text);
+            dn2 = Convert.ToDouble(BB.Text);
+            
+            result = dn1 + dn2; 
+            CC.Text = result.ToString();
+          
+        }
+
+        private void Min(object sender, RoutedEventArgs e) // минус
+        {
+            double dn1, dn2, result;
+            dn1 = Convert.ToDouble(AA.Text);
+            dn2 = Convert.ToDouble(BB.Text);
+
+            result = dn1 - dn2; 
+            CC.Text = result.ToString();
+
+        }
+
+        private void Del(object sender, RoutedEventArgs e) // деление
+        {
+            double dn1, dn2, result;
+            dn1 = Convert.ToDouble(AA.Text);
+            dn2 = Convert.ToDouble(BB.Text);
+
+            result = dn1 / dn2; 
+            CC.Text = result.ToString();
+
+        }
+
+        private void Um(object sender, RoutedEventArgs e) // умножение
+        {
+            double dn1, dn2, result;
+            dn1 = Convert.ToDouble(AA.Text);
+            dn2 = Convert.ToDouble(BB.Text);
+
+            result = dn1 * dn2; 
+            CC.Text = result.ToString();
+
+        }
+
+        private void Click(object sender, RoutedEventArgs e) // считывает текст из двух полей
+        {
+            
+            TextBox AA = (TextBox)sender;
+            D1 = AA.Text;
+            TextBox BB = (TextBox)sender;
+            D2 = BB.Text;
+        }
+
+         private void Enter(object sender, RoutedEventArgs e) // считывает нажатие на клавиши
+         {
+             TextBox AA = (TextBox)sender;
+             TextBox BB = (TextBox)sender;
+             if (AA.Text == "0")
+             AA.Text = BB.Text;
+             else
+             AA.Text = AA.Text + BB.Text;
+         } 
+    }
+}
