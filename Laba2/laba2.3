@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Laba2._3
+{
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        
+        public MainWindow()
+        {
+            InitializeComponent();
+            DateTime dtNow = DateTime.Now;
+            comboboxDays.IsEnabled = false;
+            SetDayOfMonth(dtNow);
+            InintializeMonth();
+            SetMonth(dtNow);
+            SetYear(dtNow);
+        }
+
+        void comboboxMouths_SelectedChanged(object sender, EventArgs e)
+        {
+            DateTime dtNow = DateTime.Now;
+            int daysInMonth = DateTime.DaysInMonth(dtNow.Year, comboboxMouths.SelectedIndex + 1);
+            int selectedDay = dtNow.Day < daysInMonth ? dtNow.Day : daysInMonth;
+            SetDayOfMonth(new DateTime(dtNow.Year, comboboxMouths.SelectedIndex + 1, selectedDay));
+        }
+
+        private void SetDayOfMonth(DateTime dateTime)
+        {
+
+            if (IsEnabled == false)
+            {
+                comboboxDays.IsEnabled = true;
+            }
+            int quantityDays = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
+            int offset = 1;
+            int quantityIterations = quantityDays + offset;
+            comboboxDays.Items.Clear();
+            for (int i = offset; i < quantityIterations; i++)
+                comboboxDays.Items.Add(i < 10 ? "0" + i.ToString() : i.ToString());
+            comboboxDays.SelectedIndex = dateTime.Day - offset;
+        }
+
+        public void InintializeMonth()
+        {
+            string[] monthes = {
+                "january", "february", "march", "april", "may", "june", "july",
+                "august", "september", "october", "november", "december" };
+            for (int i = 0; i < monthes.Length; i++)
+                comboboxMouths.Items.Add(monthes[i]);
+        }
+
+        public void SetMonth(DateTime dateTime)
+        {
+            
+            comboboxMouths.SelectedIndex = dateTime.Month - 1;
+        }
+
+        private void SetYear(DateTime dateTime)
+        {
+            
+            int year = dateTime.Year + 20;
+
+            comboboxYears.Items.Clear();
+            for (int j = 1956; j < year; j++)
+            {
+                comboboxYears.Items.Add(j<10 ? "0" + j.ToString() : j.ToString());
+                comboboxYears.SelectedIndex = dateTime.Year;
+            }
+        }
+
+    }
+}
